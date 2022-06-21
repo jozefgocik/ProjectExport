@@ -6,7 +6,7 @@ Add option to export chosen data from project in form of HTML table. Also adds c
 Author
 ------
 
-- Matej Kovaľ
+- Matej Kovaľ (Edited by Jozef Gocik)
 - License MIT
 
 Requirements
