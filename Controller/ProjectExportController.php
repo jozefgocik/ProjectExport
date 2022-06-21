@@ -23,6 +23,8 @@ class ProjectExportController extends BaseController
 
             $id = $this->request->getRawValue('TaskId');
             $title = $this->request->getRawValue('Title');
+            $swimlane = $this->request->getRawValue('Swimlane');
+            $category = $this->request->getRawValue('Category');
             $description = $this->request->getRawValue('Description');
             $column = $this->request->getRawValue('Column');
             $status = $this->request->getRawValue('Status');
@@ -33,7 +35,7 @@ class ProjectExportController extends BaseController
             $time_spent = $this->request->getRawValue('TimeSpent');
 
             if ($from && $to) {
-                $data = $this->$model->$method($project['id'], $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent);
+                $data = $this->$model->$method($project['id'], $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category);
 
                 $table = "";
                 $styles = "
