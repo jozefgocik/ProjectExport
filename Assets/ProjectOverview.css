@@ -1,0 +1,47 @@
+.checklist-row label {
+  display: flex;
+  align-items: center;
+  background: #eee;
+  color: #000;
+  padding: 0.5em;
+  margin: 0;
+}
+
+.checklist-row:nth-child(2n) label {
+  background: #d6d6d6;
+  color: #000;
+}
+
+.checklist-row input[type="checkbox"] {
+  -webkit-appearance:none;
+  width: 1.4em;
+  height: 1.4em;
+  background:white;
+  border: 2px solid #333;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checklist-row input[type='checkbox']:checked {
+  background: #333;
+}
+
+.checklist-row input[type='checkbox']:checked:after {
+  content: '✓';
+  color: #FFF;
+  display: inline;
+}
+
+.form-top {
+  display: flex;
+  margin: 2rem 0 2rem 1rem;
+}
+
+.form-right {
+  margin-left: 3em;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
