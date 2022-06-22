@@ -28,6 +28,26 @@
       <?= $this->form->hidden('project_id', $values) ?>
       <?= $this->form->date(t('Start date'), 'from', $values) ?>
       <?= $this->form->date(t('End date'), 'to', $values) ?>
+
+      <div>
+          <label for="head">Table header background color:</label>
+          <input type="color" id="header_bg" name="header_bg" value="#36304a">
+          <label for="head">Table header text color:</label>
+          <input type="color" id="header_text" name="header_text" value="#ffffff">
+      </div>
+      <div>
+          <label for="body">Table body background color:</label>
+          <input type="color" id="body_bg" name="body_bg" value="#f5f5f5">
+          <label for="body">Table body text color:</label>
+          <input type="color" id="body_text" name="body_text" value="#808080">
+      </div>
+      <div>
+          <label for="body">Table footer background color:</label>
+          <input type="color" id="footer_bg" name="footer_bg" value="#cccccc">     
+          <label for="body">Table footer text color:</label>
+          <input type="color" id="footer_text" name="footer_text" value="#000000">      
+      </div>
+
     </div>
   </div>
   <div>
