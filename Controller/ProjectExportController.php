@@ -33,6 +33,13 @@ class ProjectExportController extends BaseController
             $start_date = $this->request->getRawValue('StartDate');
             $time_estimated = $this->request->getRawValue('TimeEstimated');
             $time_spent = $this->request->getRawValue('TimeSpent');
+            //Colors
+            $color_header_bg = $this->request->getRawValue('header_bg');
+            $color_header_text = $this->request->getRawValue('header_text');
+            $color_body_bg = $this->request->getRawValue('body_bg');
+            $color_body_text = $this->request->getRawValue('body_text');
+            $color_footer_bg = $this->request->getRawValue('footer_bg');
+            $color_footer_text = $this->request->getRawValue('footer_text');
 
             if ($from && $to) {
                 $data = $this->$model->$method($project['id'], $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category);
@@ -49,14 +56,14 @@ class ProjectExportController extends BaseController
                     }
 
                     .export-table thead tr {
-                      background: #36304a;
+                      background: $color_header_bg;
                       font-size: 17px;
-                      color: white;
+                      color: $color_header_text;
                     }
 
                     .export-table tr {
                       font-size: 15px;
-                      color: grey;
+                      color: $color_body_text;
                     }
 
                     .export-table td, .export-table th {
@@ -65,12 +72,12 @@ class ProjectExportController extends BaseController
                     }
 
                     .export-table tr:nth-child(2n) {
-                      background: #f5f5f5;
+                      background: $color_body_bg;
                     }
 
                     .sum-cell {
-                      background: #ccc;
-                      color: black;
+                      background: $color_footer_bg;
+                      color: $color_footer_text;
                     }
                   </style>";
                 $i = 0; // For identifying first row
@@ -83,6 +90,12 @@ class ProjectExportController extends BaseController
                 $sumEstimated = 0.0;
                 $hoursIndexFound = false;
                 $estimatedHoursIndexFound = false;
+
+                $projectName = $project['name'];
+                print "<h1 style='text-align: center;'>$projectName</h1>";
+
+                $projectDescription = $project['description'];
+                print "<p>$projectDescription</p>";
 
                 foreach ($data as $row) {
                     $done = false; // For identifying if this row is in column Done
