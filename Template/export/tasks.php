@@ -14,6 +14,7 @@
       <div class="checklist-row"><?= $this->form->checkbox('Swimlane', t('Swimlane'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Category', t('Category'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Description', t('Description'), 1, true) ?></div>
+      <div class="checklist-row"><?= $this->form->checkbox('Salary', t('Salary'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Column', t('Column'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Status', t('Status'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('DueDate', t('Due date'), 1, true) ?></div>
@@ -29,6 +30,20 @@
       <?= $this->form->date(t('Start date'), 'from', $values) ?>
       <?= $this->form->date(t('End date'), 'to', $values) ?>
 
+      <form>
+        <label>Sort table by:</label>
+        <label>
+            <input type="radio" name="sort_table_by" value="sort_by_id"> ID
+        </label>
+        <label>
+            <input type="radio" name="sort_table_by" value="sort_by_swimlane"> Swimlane
+        </label>
+        <label>
+            <input type="radio" name="sort_table_by" value="sort_by_category"> Category
+        </label>
+      </form>
+    </div>
+    <div class="form-right">
       <div>
           <label for="head">Table header background color:</label>
           <input type="color" id="header_bg" name="header_bg" value="#36304a">
@@ -47,7 +62,6 @@
           <label for="body">Table footer text color:</label>
           <input type="color" id="footer_text" name="footer_text" value="#000000">      
       </div>
-
     </div>
   </div>
   <div>
