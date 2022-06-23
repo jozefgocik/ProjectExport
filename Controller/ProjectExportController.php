@@ -98,7 +98,13 @@ class ProjectExportController extends BaseController
                 print "<h1 style='text-align: center;'>$projectName</h1>";
 
                 $projectDescription = $project['description'];
-                print "<p>$projectDescription</p>";
+
+                if (empty($projectDescription)) {
+                    $this->response->json(array());
+                } else {
+                    $preview = $this->helper->text->markdown($projectDescription);
+                    print($preview);
+                }
 
                 foreach ($data as $row) {
                     $done = false; // For identifying if this row is in column Done
