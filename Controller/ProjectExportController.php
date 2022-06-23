@@ -92,6 +92,8 @@ class ProjectExportController extends BaseController
                 $hoursIndexFound = false;
                 $estimatedHoursIndexFound = false;
 
+                print "<img src='/kanboard/plugins/ProjectExport/revolware_logo.png' class='center' alt='Revolware Logo' width='30%' style='display: block; margin-left: auto; margin-right: auto;'>";
+
                 $projectName = $project['name'];
                 print "<h1 style='text-align: center;'>$projectName</h1>";
 
