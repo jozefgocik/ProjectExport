@@ -27,16 +27,18 @@ class TaskExport extends Base
      * @param  mixed   $to         End date (timestamp or user formatted date)
      * @return array
      */
-    public function export($project_id, $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category)
+    public function export($project_id, $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category, $salary)
     {
-        $tasks = $this->getTasks($project_id, $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category);
+        $tasks = $this->getTasks($project_id, $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category, $salary);
         $taskIds = array_column($tasks, 'id');
         $tags = $this->taskTagModel->getTagsByTaskIds($taskIds);
         $colors = $this->colorModel->getList();
-        $results = array($this->getColumns($id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category));
+        $results = array($this->getColumns($id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category, $salary));
 
         foreach ($tasks as &$task) {
             $task = $this->format($task);
+            //Salary
+            $task['name'] = (float) $task['name'] * (float) $task['time_estimated'] . "€/hour";
             $results[] = array_values($task);
         }
 
@@ -52,7 +54,7 @@ class TaskExport extends Base
      * @param  mixed   $to         End date (timestamp or user formatted date)
      * @return array
      */
-    protected function getTasks($project_id, $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category)
+    protected function getTasks($project_id, $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category, $salary)
     {
         if (!is_numeric($from)) {
             $from = $this->dateParser->removeTimeFromTimestamp($this->dateParser->getTimestamp($from));
@@ -78,6 +80,9 @@ class TaskExport extends Base
         if ($description) {
             array_push($columnsCall, TaskModel::TABLE . '.description');
         }
+        if ($salary) {
+            array_push($columnsCall,  CategoryModel::TABLE . '.name');
+        }
         if ($column) {
             array_push($columnsCall, ColumnModel::TABLE . '.title AS column_title');
         }
@@ -100,6 +105,18 @@ class TaskExport extends Base
             array_push($columnsCall, TaskModel::TABLE . '.time_spent');
         }
 
+        //Sorting table
+        $sort_table_by = $this->request->getRawValue('sort_table_by');
+        if ($sort_table_by == 'sort_by_swimlane') {
+            $sort_table_by = '.swimlane_id';
+        }
+        else if ($sort_table_by == 'sort_by_category') {
+            $sort_table_by = '.category_id';
+        }
+        else {
+            $sort_table_by = '.id';
+        }
+
         return $this->db->table(TaskModel::TABLE)
             ->columns(...$columnsCall
             )
@@ -112,7 +129,7 @@ class TaskExport extends Base
             ->gte(TaskModel::TABLE . '.date_creation', $from)
             ->lte(TaskModel::TABLE . '.date_creation', $to)
             ->eq(TaskModel::TABLE . '.project_id', $project_id)
-            ->asc(TaskModel::TABLE . '.id')
+            ->asc(TaskModel::TABLE . $sort_table_by)
             ->findAll();
     }
 
@@ -146,7 +163,7 @@ class TaskExport extends Base
      * @access protected
      * @return string[]
      */
-    protected function getColumns($id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category)
+    protected function getColumns($id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category, $salary)
     {
         $columns = [];
 
@@ -164,6 +181,9 @@ class TaskExport extends Base
         }
         if ($description) {
             array_push($columns, e('Description'));
+        }
+        if ($salary) {
+            array_push($columns, e('Salary'));
         }
         if ($column) {
             array_push($columns, e('Column'));
