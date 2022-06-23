@@ -26,6 +26,7 @@ class ProjectExportController extends BaseController
             $swimlane = $this->request->getRawValue('Swimlane');
             $category = $this->request->getRawValue('Category');
             $description = $this->request->getRawValue('Description');
+            $salary = $this->request->getRawValue('Salary');
             $column = $this->request->getRawValue('Column');
             $status = $this->request->getRawValue('Status');
             $due_date = $this->request->getRawValue('DueDate');
@@ -42,7 +43,7 @@ class ProjectExportController extends BaseController
             $color_footer_text = $this->request->getRawValue('footer_text');
 
             if ($from && $to) {
-                $data = $this->$model->$method($project['id'], $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category);
+                $data = $this->$model->$method($project['id'], $from, $to, $id, $title, $description, $column, $status, $due_date, $creation_date, $start_date, $time_estimated, $time_spent, $swimlane, $category, $salary);
 
                 $table = "";
                 $styles = "
