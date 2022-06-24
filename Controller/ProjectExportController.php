@@ -173,10 +173,10 @@ class ProjectExportController extends BaseController
                 }
 
                 if ($estimatedHoursIndexFound) {
-                    $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumEstimated . "</b> (Done)</td>";
+                    $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumEstimated . "</b></td>";
                 }
                 if ($hoursIndexFound) {
-                    $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumHours . "</b> (Done)</td></tr>";
+                    $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumHours . "</b></td></tr>";
                 }
                 if (!$hoursIndexFound && !$estimatedHoursIndexFound) {
                     $sumRow = "";
