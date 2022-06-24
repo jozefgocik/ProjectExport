@@ -148,14 +148,12 @@ class ProjectExportController extends BaseController
                             }
                         }
 
-                        if ($done) { // Sum for tasks that are in Done
-                            if ($hoursIndex != 0 && $j == $hoursIndex && $j != 0) {
-                                $sumHours += floatval($cell);
-                            }
+                        if ($hoursIndex != 0 && $j == $hoursIndex && $j != 0) {
+                            $sumHours += floatval($cell);
+                        }
 
-                            if ($estimatedHoursIndex != 0 && $j == $estimatedHoursIndex && $j != 0) {
-                                $sumEstimated += floatval($cell);
-                            }
+                        if ($estimatedHoursIndex != 0 && $j == $estimatedHoursIndex && $j != 0) {
+                            $sumEstimated += floatval($cell);
                         }
 
                         $j++;
