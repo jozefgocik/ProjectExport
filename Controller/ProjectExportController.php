@@ -95,7 +95,7 @@ class ProjectExportController extends BaseController
                 print "<img src='/kanboard/plugins/ProjectExport/revolware_logo.png' class='center' alt='Revolware Logo' width='30%' style='display: block; margin-left: auto; margin-right: auto;'>";
 
                 $projectName = $project['name'];
-                print "<h1 style='text-align: center;'>$projectName</h1>";
+                print "<h1 style='text-align: center; font-family:Arial;'>$projectName</h1>";
 
                 $projectDescription = $project['description'];
 
@@ -103,7 +103,7 @@ class ProjectExportController extends BaseController
                     $this->response->json(array());
                 } else {
                     $preview = $this->helper->text->markdown($projectDescription);
-                    print($preview);
+                    print("<div style='font-family:Arial'>$preview</div>");
                 }
 
                 foreach ($data as $row) {
