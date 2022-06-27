@@ -177,8 +177,20 @@ class ProjectExportController extends BaseController
                 }
 
                 $sumRow = "<tr>"; // Code for sum row
-                for ($a = 0; $a < $salaryIndex; $a++) {
-                    $sumRow .= "<td></td>";
+                if ($salaryIndexFound) {
+                    for ($a = 0; $a < $salaryIndex; $a++) {
+                        $sumRow .= "<td></td>";
+                    }
+                }
+                else if ($estimatedHoursIndexFound) {
+                    for ($a = 0; $a < $estimatedHoursIndex; $a++) {
+                        $sumRow .= "<td></td>";
+                    }
+                }
+                else if ($hoursIndexFound) {
+                    for ($a = 0; $a < $hoursIndex; $a++) {
+                        $sumRow .= "<td></td>";
+                    }
                 }
 
                 if ($salaryIndexFound) {
