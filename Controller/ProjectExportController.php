@@ -84,13 +84,16 @@ class ProjectExportController extends BaseController
                 $i = 0; // For identifying first row
                 $hoursIndex = 0; // Index of column with hours
                 $estimatedHoursIndex = 0; // Index of column with estimated hours
+                $salaryIndex = 0;
                 $creationDateIndex = 0;
                 $startDateIndex = 0;
                 $dueDateIndex = 0;
                 $sumHours = 0.0; // Sums of Done tasks
                 $sumEstimated = 0.0;
+                $sumSalary = 0.0;
                 $hoursIndexFound = false;
                 $estimatedHoursIndexFound = false;
+                $salaryIndexFound = false;
 
                 print "<img src='/kanboard/plugins/ProjectExport/revolware_logo.png' class='center' alt='Revolware Logo' width='30%' style='display: block; margin-left: auto; margin-right: auto;'>";
 
@@ -124,6 +127,10 @@ class ProjectExportController extends BaseController
                                 $estimatedHoursIndex = $j;
                                 $estimatedHoursIndexFound = true;
                             }
+                            if ($cell == "Salary") {
+                                $salaryIndex = $j;
+                                $salaryIndexFound = true;
+                            }
                             if ($cell == "Creation date") {
                                 $creationDateIndex = $j;
                             }
@@ -151,9 +158,11 @@ class ProjectExportController extends BaseController
                         if ($hoursIndex != 0 && $j == $hoursIndex && $j != 0) {
                             $sumHours += floatval($cell);
                         }
-
                         if ($estimatedHoursIndex != 0 && $j == $estimatedHoursIndex && $j != 0) {
                             $sumEstimated += floatval($cell);
+                        }
+                        if ($salaryIndex != 0 && $j == $salaryIndex && $j != 0) {
+                            $sumSalary += floatval($cell);
                         }
 
                         $j++;
@@ -168,17 +177,20 @@ class ProjectExportController extends BaseController
                 }
 
                 $sumRow = "<tr>"; // Code for sum row
-                for ($a = 0; $a < $estimatedHoursIndex; $a++) {
+                for ($a = 0; $a < $salaryIndex; $a++) {
                     $sumRow .= "<td></td>";
                 }
 
+                if ($salaryIndexFound) {
+                    $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumSalary . " €" . "</b></td>";
+                }
                 if ($estimatedHoursIndexFound) {
                     $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumEstimated . "</b></td>";
                 }
                 if ($hoursIndexFound) {
                     $sumRow .= "<td class='sum-cell'>Sum: <b>" . $sumHours . "</b></td></tr>";
                 }
-                if (!$hoursIndexFound && !$estimatedHoursIndexFound) {
+                if (!$hoursIndexFound && !$estimatedHoursIndexFound && !$salaryIndexFound) {
                     $sumRow = "";
                 }
 
