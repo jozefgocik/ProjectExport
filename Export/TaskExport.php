@@ -80,9 +80,6 @@ class TaskExport extends Base
         if ($description) {
             array_push($columnsCall, TaskModel::TABLE . '.description');
         }
-        if ($salary) {
-            array_push($columnsCall,  CategoryModel::TABLE . '.name');
-        }
         if ($column) {
             array_push($columnsCall, ColumnModel::TABLE . '.title AS column_title');
         }
@@ -97,6 +94,9 @@ class TaskExport extends Base
         }
         if ($due_date) {
             array_push($columnsCall, TaskModel::TABLE . '.date_due');
+        }
+        if ($salary) {
+            array_push($columnsCall,  CategoryModel::TABLE . '.name');
         }
         if ($time_estimated) {
             array_push($columnsCall, TaskModel::TABLE . '.time_estimated');
@@ -182,9 +182,6 @@ class TaskExport extends Base
         if ($description) {
             array_push($columns, e('Description'));
         }
-        if ($salary) {
-            array_push($columns, e('Salary'));
-        }
         if ($column) {
             array_push($columns, e('Column'));
         }
@@ -199,6 +196,9 @@ class TaskExport extends Base
         }
         if ($due_date) {
             array_push($columns, e('Due date'));
+        }
+        if ($salary) {
+            array_push($columns, e('Salary'));
         }
         if ($time_estimated) {
             array_push($columns, e('Time estimated'));
