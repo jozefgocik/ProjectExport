@@ -38,11 +38,13 @@ class TaskExport extends Base
         foreach ($tasks as &$task) {
             $task = $this->format($task);
             //Salary
-            if ($salary && $time_estimated) {
-                $task['name'] = (float) $task['name'] * (float) $task['time_estimated'] . " €";
-            }
-            else {
-                $task['name'] = "Enable Time Estimated!";
+            if ($salary) {
+                if ($time_estimated) {
+                    $task['name'] = (float) $task['name'] * (float) $task['time_estimated'] . " €";
+                }
+                else {
+                    $task['name'] = "Enable Time Estimated!";
+                }
             }
             $results[] = array_values($task);
         }
