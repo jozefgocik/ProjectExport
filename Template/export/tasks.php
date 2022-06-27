@@ -14,12 +14,12 @@
       <div class="checklist-row"><?= $this->form->checkbox('Swimlane', t('Swimlane'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Category', t('Category'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Description', t('Description'), 1, true) ?></div>
-      <div class="checklist-row"><?= $this->form->checkbox('Salary', t('Salary'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Column', t('Column'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('Status', t('Status'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('DueDate', t('Due date'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('CreationDate', t('Creation date'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('StartDate', t('Start date'), 1, true) ?></div>
+      <div class="checklist-row"><?= $this->form->checkbox('Salary', t('Salary'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('TimeEstimated', t('Time estimated'), 1, true) ?></div>
       <div class="checklist-row"><?= $this->form->checkbox('TimeSpent', t('Time spent'), 1, true) ?></div>
     </div>
